@@ -3,13 +3,13 @@ from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 import datetime 
 from flask_marshmallow import Marshmallow
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 CORS(app)
 
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://sql6523158:8N1ut2hYpx@sql6.freesqldatabase.com/sql6523158'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://mydatabase0929:mydatabase0929@db4free.net/mydatabase0929'
 app.config['SQLALCHEMY_TRACK_MODIFICATION'] = False
 
 
@@ -20,7 +20,7 @@ ma = Marshmallow(app)
 
 class Phonenum(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    number = db.Column(db.String(10))
+    number = db.Column(db.Integer())
     fullname = db.Column(db.Text())
     date = db.Column(db.DateTime, default=datetime.datetime.now)
 
@@ -61,6 +61,7 @@ def add_phonenum():
 
 
 @app.route('/update/<id>/', methods=['PUT'])
+@cross_origin(allow_headers=['Content-Type'])
 def update_phonenum(id):
     phonenum = Phonenum.query.get(id)
 
