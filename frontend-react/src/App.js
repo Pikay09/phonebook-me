@@ -2,15 +2,16 @@ import './App.css';
 import {useState, useEffect} from 'react'
 import Phonelists from './components/Phonelists';
 import UpdateForm from './components/UpdateForm';
+import { Button } from '@mui/material';
 
 
 function App() {
-  const [phonenums, setPhonenums] = useState(['pleasewait'])
+  const [phonenums, setPhonenums] = useState([])
   const [editednumber, setEditednumber] = useState(null)
 
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/get', {
-      'method': 'GET',
+    fetch('http://localhost:5000/get', {
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json'},
     })
@@ -35,11 +36,40 @@ function App() {
     setPhonenums(new_phonenumber)   
   }
 
+  const openForm = () => {
+    setEditednumber({fullname: '', number:''})
+  }
+
+  const insertedPhonenum = (phonenum) => {
+    const new_nombor = [...phonenums, phonenum]
+    setPhonenums(new_nombor)
+  }
+
+  const deletePhonenum = (phonenum) => {
+    const new_nombors = phonenums.filter(mynumbers => {
+      if(mynumbers.id === phonenum.id) {
+        return false;
+      } else {
+        return true;
+      }
+    })
+    setPhonenums(new_nombors)
+  }
+
+  
+  
   return (
     <div className="App">
-      
-      <Phonelists phonenums={phonenums} editNumber={editnumber}/>
-      {editednumber? <UpdateForm phonenum={editednumber} updatedData={updatedData} /> : null}
+      <div>
+        <Button onClick={openForm} variant='outlined' color='success'>
+        Insert New Number
+      </Button>
+      </div>
+      <Phonelists phonenums={phonenums} editNumber={editnumber} 
+      deletePhonenum={deletePhonenum}/>
+      <div>
+        {editednumber? <UpdateForm phonenum={editednumber} updatedData={updatedData} insertedPhonenum={insertedPhonenum} /> : null}
+      </div>
     </div>
   ); 
 }

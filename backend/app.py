@@ -3,7 +3,7 @@ from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 import datetime 
 from flask_marshmallow import Marshmallow
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
@@ -20,7 +20,7 @@ ma = Marshmallow(app)
 
 class Phonenum(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    number = db.Column(db.Integer())
+    number = db.Column(db.String(10))
     fullname = db.Column(db.Text())
     date = db.Column(db.DateTime, default=datetime.datetime.now)
 
@@ -61,7 +61,6 @@ def add_phonenum():
 
 
 @app.route('/update/<id>/', methods=['PUT'])
-@cross_origin(allow_headers=['Content-Type'])
 def update_phonenum(id):
     phonenum = Phonenum.query.get(id)
 
@@ -76,7 +75,7 @@ def update_phonenum(id):
     
 
 @app.route('/erase/<id>/', methods=['DELETE'])
-def delete_phonenum(id):
+def phonenum_delete(id):
     phonenum = Phonenum.query.get(id)
     db.session.delete(phonenum)
     db.session.commit()

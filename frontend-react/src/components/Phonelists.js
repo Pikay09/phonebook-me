@@ -2,12 +2,18 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
+import APIservice from './APIservice';
 
 function Phonelists(props) {
   const editNumber = (phonenum) => {
     props.editNumber(phonenum)
-
   }
+
+  const deletePhonenum = (phonenum) => {
+    APIservice.DeletePhonenum(phonenum.id)
+    .then(() => props.deletePhonenum(phonenum))
+  }
+
   return (
     <div>
       <Card>
@@ -21,7 +27,8 @@ function Phonelists(props) {
 
             <Stack spacing={2} direction="row">
                 <Button variant='contained' onClick={() => editNumber(phonenum)}>Update</Button>
-                <Button variant="outlined" color='error'>Delete</Button>    
+                <Button variant="outlined" color='error'
+                onClick={()=>deletePhonenum(phonenum)} >Delete</Button>    
             </Stack>
             
           </div>  
