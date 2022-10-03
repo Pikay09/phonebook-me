@@ -32,7 +32,6 @@ function UpdateForm(props) {
     const [number, setNumber] = useState('')
     const [fullname, setFullname] = useState('')
 
-
     useEffect(() => {
       setFullname(props.phonenum.fullname)
       setNumber(props.phonenum.number)
@@ -44,7 +43,6 @@ function UpdateForm(props) {
             props.updatedData(resp)
         })
         .catch((err) => console.log(err))
-
     }
 
     const insertPhonenum = () => {
@@ -52,7 +50,6 @@ function UpdateForm(props) {
       .then(resp => props.insertedPhonenum(resp))
       .catch((err) => console.log(err))
     }
-
 
   return (
     <div >
@@ -79,13 +76,11 @@ function UpdateForm(props) {
             props.phonenum.id? <Button variant="contained" color="success" onClick={updatePhonenum}>Update</Button> : 
             <Button variant="contained" color="success" onClick={insertPhonenum}>Save Number</Button>
             }
-          
           </div>
         </div>  
         ): 'fetching data'
         }
       </FormModal>
-        
     </div>
   )
 }

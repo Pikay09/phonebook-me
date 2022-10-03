@@ -4,7 +4,6 @@ import Phonelists from './components/Phonelists';
 import UpdateForm from './components/UpdateForm';
 import { Button } from '@mui/material';
 
-
 function App() {
   const [phonenums, setPhonenums] = useState([])
   const [editednumber, setEditednumber] = useState(null)
@@ -38,6 +37,7 @@ function App() {
 
   const openForm = () => {
     setEditednumber({fullname: '', number:''})
+
   }
 
   const insertedPhonenum = (phonenum) => {
@@ -55,8 +55,6 @@ function App() {
     })
     setPhonenums(new_nombors)
   }
-
-  
   
   return (
     <div className="App">
@@ -64,12 +62,12 @@ function App() {
         <Button sx={{marginY:3}} onClick={openForm} variant='outlined' color='success'>
         Insert New Number
       </Button>
-      </div>
-      <Phonelists phonenums={phonenums} editNumber={editnumber} 
-      deletePhonenum={deletePhonenum}/>
       <div>
         {editednumber? <UpdateForm phonenum={editednumber} updatedData={updatedData} insertedPhonenum={insertedPhonenum} /> : null}
       </div>
+      </div>
+      <Phonelists phonenums={phonenums} editNumber={editnumber} 
+      deletePhonenum={deletePhonenum}/>
     </div>
   ); 
 }

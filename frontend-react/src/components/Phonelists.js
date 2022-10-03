@@ -17,7 +17,6 @@ function Phonelists(props) {
 
   return (
     <div>
-      
        {props.phonenums.map(phonenum => {
         return (
           <div key={phonenum.id}>
@@ -26,7 +25,6 @@ function Phonelists(props) {
             <Typography sx={{ fontSize: 27 }} variant="body2">{phonenum.number}</Typography>
             <Typography sx={{ fontSize: 14 }} variant="body2">Date created: {phonenum.date}</Typography>
 
-
             <Stack spacing={2} direction="row" sx={{ justifyContent:"center", alignItems:"center" }}>
                 <Button variant='contained' onClick={() => editNumber(phonenum)}>Update</Button>
                 <Button variant="outlined" color='error'
@@ -34,11 +32,8 @@ function Phonelists(props) {
             </Stack>
             </Card>
           </div>  
-          
         )
         })} 
-      
-        
     </div>
   )
 }
