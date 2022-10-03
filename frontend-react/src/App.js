@@ -60,8 +60,8 @@ function App() {
   
   return (
     <div className="App">
-      <div>
-        <Button onClick={openForm} variant='outlined' color='success'>
+      <div >
+        <Button sx={{marginY:3}} onClick={openForm} variant='outlined' color='success'>
         Insert New Number
       </Button>
       </div>
